@@ -1,0 +1,25 @@
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+# Sample dataset
+texts = ["Win a free iPhone now!", 
+         "Let's meet for lunch tomorrow", 
+         "You have won a lottery!", 
+         "Call me when you are free"]
+
+labels = ["spam", "not spam", "spam", "not spam"]
+
+# Step 1: Convert text to features
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(texts)
+
+# Step 2: Train model
+model = MultinomialNB()
+model.fit(X, labels)
+
+# Step 3: Test prediction
+test_text = ["Free prize waiting for you"]
+test_X = vectorizer.transform(test_text)
+prediction = model.predict(test_X)
+
+print("Prediction:", prediction[0])
